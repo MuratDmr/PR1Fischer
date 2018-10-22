@@ -1,38 +1,48 @@
 import java.util.Scanner;
 
-public class dasd {
-	
-	public static void main (String[] args) {
+//Determine class
+public class Übung_3 {
+	// Using main method
+	public static void main(String[] args) {
+		// do-while loop for checking
 		do {
+			// creating scannerobject
 			Scanner abfrage1 = new Scanner(System.in);
-			System.out.println("Wähle aus folgenden Möglichkeiten aus. \n1:€->$\n2:$->€");
+			// output-question
+			System.out.println("Wähle aus folgenden Möglichkeiten aus.\n1:€->$\n2:$->€");
 			float unity = abfrage1.nextFloat();
+			// convert float to int
 			int währung = (int) unity;
-					
-			if((währung!=1)&&(währung!=2)) {
-				System.out.println("Das ist nicht möglich!");
-			}else {
-				Scanner abfrage2 = new Scanner(System.in);
-				System.out.println("Wie viel Geld soll umgetauscht werden?");
-				float money = abfrage2.nextFloat();
-				
-				switch(währung) {
-				case 1:
-					System.out.println(money+"Euro sind"+money*2+" Dollar.");
-					break;
-				case 2:
-					System.out.println(money+"Dollar sind"+money*0.5+" Euro.");
-					break;
-				}
-				Scanner abfrage3 = new Scanner(System.in);
-				System.out.println("Möchten Sie das Programm beenden? Drücken Sie Y ansonsten beliebig");
-				
-				char ende;
-				ende = abfrage3.next().charAt(0);
-				if (ende == 'Y') {
-					System.out.println("Das Programm ist nun beendet");
-				}
-				}
-			}while(true);
-		}
+			// creating second scannerobeject for next output
+			Scanner abfrage2 = new Scanner(System.in);
+			// output-question
+			System.out.println("Wie viel Geld soll umgetauscht werden?");
+			float money = abfrage2.nextFloat();
+			// distinction between first and second possibility
+			switch (währung) {
+			// if \n1
+			case 1:
+				System.out.println(money + "Euro sind " + money * 2 + "Dollar.");
+				// switch ending/no case2
+				break;
+			// if \n2
+			case 2:
+				System.out.println(money + "Dollar sind " + money * 0.5 + "Euro.");
+				// switch ending
+				break;
+			}
+			// creating third scannerobject
+			Scanner exitabfrage = new Scanner(System.in);
+			// output-question
+			System.out.println("Möchten Sie das Programm beenden ? - Drücken Sie Y sonst beliebig");
+			// creating new data type
+			char ende;
+			ende = exitabfrage.next().charAt(0);
+			// if you press 'Y', application will end with an output
+			if (ende == 'Y') {
+				System.out.println("Das Programm ist nun beendet");
+				break;
+			}
+		} while (true);
 	}
+}
