@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+public class Übung_3 {
+	
+	public static void main(String[] args) {
+		do {
+			Scanner eingabe = new Scanner(System.in);
+			System.out.println("Wähle folgenden Vorgang aus.\n1:€->$\n2:$->€");
+			float unity = eingabe.nextFloat();
+			int währung = (int) unity;
+			
+			if((währung !=1)&&(währung!=2)) {
+				System.out.println("Nicht möglich!");
+			}else {
+				Scanner abfrage = new Scanner(System.in);
+				System.out.println("Wie viel möchten Sie umtauschen?");
+				float money = abfrage.nextFloat();
+				
+				switch(währung) {
+				case 1:
+					System.out.println(money+"Euro sind "+ money*2+" Dollar.");
+					break;
+				case 2:
+					System.out.println(money+"Dollar sind "+money*0.5+" Euro.");
+					break;
+				}
+			}
+			Scanner beenden = new Scanner(System.in);
+			System.out.println("Programm beenden? Drücke dafür '' Y '' - ansonsten beliebig ");
+			
+			char ende;
+			ende = beenden.next().charAt(0);
+			if(ende == 'Y') {
+				System.out.println("Das Programm ist nun beendet.");
+				break;
+			}
+			} while (true);
+		}
+	}
