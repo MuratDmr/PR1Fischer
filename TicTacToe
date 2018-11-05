@@ -1,0 +1,117 @@
+import java.util.Scanner;
+
+//Declare class - Klassennamen definieren
+public class übung2 {
+	// Using main methode - Benutzen der Main-Methode
+    public static void main(String[] args) {
+    	//Import new Scanner - importieren eines Scanners
+        Scanner sc = new Scanner(System.in);
+        boolean reihe = false;
+        //Create an array of 9 fields - 1 dimensionaler Array mit 9 Feldern
+        String[] felder = new String[9];
+        
+        //fill each field with [_] which equals an empty space / Fülle jedes Feld mit [_] - entspricht leerem Feld
+        for (int i = 0; i < felder.length; i++) {
+            felder[i] = "[_]";
+        }
+        // Starting Point - Kreis beginnt bei 0
+        int Spielzug = 0;
+        System.out.println("Es möge O beginnen!");
+        //While-loop for checking - Schleife für mehrerer Schleifen
+        while (true) {
+            //Show game on board - Zeigt Spielfeld korrekt mit Zeilenumbruch an
+            for (int i = 0; i < felder.length; i++) {
+                System.out.print(i + " " + felder[i] + "	");
+                if (i == 2) {
+                    System.out.print("\n");
+                } if (i == 5) {
+                    System.out.print("\n");
+                }if (i == 8) {
+                    System.out.print("\n");
+                }
+            }        
+            //computer turn - Computer macht einen zufälligen Zug und setzt checkingTurn auf true, anschließend println
+            int zufall;
+            boolean checkingTurn = false;
+            if (reihe) {
+                zufall = (int) Math.round((Math.random()*8));
+                if (felder[zufall].equals("[_]")) {
+                    felder[zufall] = "[X]";
+                    checkingTurn = true;
+                }
+                // throws randomnumber out
+                System.out.println("Computer setzte seinen Zug auf die Stelle "+"["+ zufall+"]");
+            }
+            // player turn - Spieler kann in ein freies Feld [_] setzen
+            else {
+                zufall = sc.nextInt();
+                if (felder[zufall].equals("[_]")) {
+                    felder[zufall] = "[O]";
+                    checkingTurn = true;
+                }
+            }
+            //9 turns+no winner -> draw - Falls es 9 Züge gab und kein Gewinner übermittelt wird Unentschieden!
+            if (Spielzug == 9) {
+                System.out.println("Es geht Unentschieden aus");
+                break;
+                //no draw
+            }else {
+                if (checkingTurn) {
+                    reihe = !reihe;
+                    //add 1 to turnNumber every round
+                    Spielzug++;
+                } else {
+                    System.out.println("Der Platz ist bereits belegt. Wiederhole!");                    
+                }
+            }           
+            // win conditions of X - Siegesbedingungen für Computer
+            boolean sieg = false;
+            // 0-2, 3-5, 6-8
+            for (int i = 0; i < felder.length; i += 3) {
+                if (felder[i ].equals("[X]") && felder[i + 1].equals("[X]") && felder[i + 2].equals("[X]")) {
+                    sieg = true;
+                }
+            }
+            // 0-6, 1-7, 2-8
+            for (int i = 0; i < 3; i++) {
+                if (felder[i].equals("[X]") && felder[i + 3].equals("[X]") && felder[i + 6].equals("[X]")) {
+                    sieg = true;
+                }
+            }
+            // crosswise - kreuzweise
+            if (felder[0].equals("[X]") && felder[4].equals("[X]") && felder[8].equals("[X]")) {
+                sieg = true;
+            }
+            if (felder[2].equals("[X]") && felder[4].equals("[X]") && felder[6].equals("[X]")) {
+                sieg = true;
+            }
+            if (sieg==true) {
+                System.out.println("X hat das Spiel gewonnen!");
+                break;
+            }                          
+            // O win conditions - Bedingungen für Spieler 
+            for (int i = 0; i < felder.length; i += 3) {
+            	//0-2, 3-5, 6-8
+                if (felder[i].equals("[O]") && felder[i + 1].equals("[O]") && felder[i + 2].equals("[O]")) {
+                    sieg = true;
+                }
+            }
+            for (int i = 0; i < 3; i++) {
+            	//0-6, 1-7, 2-8
+                if (felder[i].equals("[O]") && felder[i + 3].equals("[O]") && felder[i + 6].equals("[O]")) {
+                    sieg = true;
+                }
+            }//crosswise - kreuzweise
+            if (felder[0].equals("[O]") && felder[4].equals("[O]") && felder[8].equals("[O]")) {
+                sieg = true;
+            }
+            if (felder[2].equals("[O]") && felder[4].equals("[O]") && felder[6].equals("[O]")) {
+                sieg = true;
+            }
+            if (sieg==true) {
+                System.out.println("O hat das Spiel gewonnen!");
+                break;
+            }                                                                    
+        }
+    }
+}
